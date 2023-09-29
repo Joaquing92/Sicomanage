@@ -1,0 +1,101 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = SICPERU
+build_property.RootNamespace = SICPERU
+build_property.ProjectDir = C:\Users\jgonzales\source\repos\SICPERU\SICPERU\
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\jgonzales\source\repos\SICPERU\SICPERU
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/jgonzales/source/repos/SICPERU/SICPERU/Pages/Equipos/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXF1aXBvc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jgonzales/source/repos/SICPERU/SICPERU/Pages/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jgonzales/source/repos/SICPERU/SICPERU/Pages/Gateways/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcR2F0ZXdheXNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jgonzales/source/repos/SICPERU/SICPERU/Pages/Gateways/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcR2F0ZXdheXNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jgonzales/source/repos/SICPERU/SICPERU/Pages/Gateways/Editar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcR2F0ZXdheXNcRWRpdGFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jgonzales/source/repos/SICPERU/SICPERU/Pages/Gateways/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcR2F0ZXdheXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jgonzales/source/repos/SICPERU/SICPERU/Pages/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jgonzales/source/repos/SICPERU/SICPERU/Pages/Lineas/Chips.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGluZWFzXENoaXBzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jgonzales/source/repos/SICPERU/SICPERU/Pages/Lineas/Crear.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGluZWFzXENyZWFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jgonzales/source/repos/SICPERU/SICPERU/Pages/Lineas/Editar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGluZWFzXEVkaXRhci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jgonzales/source/repos/SICPERU/SICPERU/Pages/Lineas/Eliminar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGluZWFzXEVsaW1pbmFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jgonzales/source/repos/SICPERU/SICPERU/Pages/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJpdmFjeS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jgonzales/source/repos/SICPERU/SICPERU/Pages/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jgonzales/source/repos/SICPERU/SICPERU/Pages/Usuarios/C2V.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXN1YXJpb3NcQzJWLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jgonzales/source/repos/SICPERU/SICPERU/Pages/Usuarios/Fenix.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXN1YXJpb3NcRmVuaXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jgonzales/source/repos/SICPERU/SICPERU/Pages/Usuarios/Gestor.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXN1YXJpb3NcR2VzdG9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jgonzales/source/repos/SICPERU/SICPERU/Pages/Usuarios/Integral_Mobile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXN1YXJpb3NcSW50ZWdyYWxfTW9iaWxlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jgonzales/source/repos/SICPERU/SICPERU/Pages/Usuarios/PRUEBAS.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXN1YXJpb3NcUFJVRUJBUy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jgonzales/source/repos/SICPERU/SICPERU/Pages/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jgonzales/source/repos/SICPERU/SICPERU/Pages/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/jgonzales/source/repos/SICPERU/SICPERU/Pages/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-iqkvjwyzew

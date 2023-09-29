@@ -1,0 +1,56 @@
+﻿@page
+@model SICPERU.Pages.Equipos.IndexModel
+@{
+}
+<!DOCTYPE html>
+<html>
+
+<br>
+<br>
+<h2>Reporte Pagos</h2>
+<p></p>
+
+<form method="get">
+    <button type="submit" class="refresh-button">Actualizar</button>
+</form>
+
+
+<p></p>
+<table id="myTable1" class="table table-dark">
+    <thead>
+        <tr>
+            <th>IdOperacion</th>
+            <th>Operacion</th>
+            <th>PagoEnProceso</th>
+            <th>SaldoInicial</th>
+            <th>CodigoProductoGestion</th>
+            <th>CodigoEtapa</th>
+            <th>CodigoProducto</th>
+            <th>Nombre</th>
+            <th>ValorTotalCuota</th>
+            <th>Diferencia</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach(var item in Model.listreporte)
+        {
+            <tr>
+                <td>@item.idOperacion</td>
+                <td>@item.NumeroOperacion</td>
+                <td>@item.PagoEnProceso</td>
+                <td>@item.SaldoInicial</td>
+                <td>@item.CodigoProductoGestion</td>
+                <td>@item.CodigoEtapa</td>
+                <td>@item.CodigoProducto</td>
+                <td>@item.Nombre</td>
+                <td>@item.ValorTotalCuota</td>
+                <td>@item.Diferencia</td>
+                
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+

@@ -1,0 +1,61 @@
+html {
+    font-size: 14px;
+}
+
+.sub-menu {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.nav-item:hover .sub-menu {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#sidebar {
+    min-width: 80px;
+    max-width: 200px;
+    background-color: #87CEEB;  Color celeste 
+    transition: all 0.3s;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 1000;
+}
+
+    #sidebar.active {
+        min-width: 80px;
+        max-width: 200px;  Aumentar este valor 
+    }
+
+    #sidebar .nav-link {
+        text-align: initial;
+        padding: 15px 5px;
+        white-space: nowrap;
+        color: white;  Cambia el color de texto a blanco 
+    }
+
+    #sidebar.active .nav-link {
+        padding: 4px;
+    }
+
+     Agrega estilos para el hover de los enlaces en el sidebar 
+    #sidebar .nav-link:hover {
+        background-color: #5F9EA0;  Color celeste más oscuro 
+        color: white;
+        text-decoration: none;
+    }
+
+ Estilos para el contenido principal 
+#main-content {
+    margin-left: 200px;  Ancho del sidebar 
+    padding: 20px;  Espacio alrededor del contenido 
+}

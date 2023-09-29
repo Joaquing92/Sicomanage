@@ -1,0 +1,60 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["SicPE"] = "SicoManage";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        /* Estilos para el centro de la página */
+        .center {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        /* Estilos para el título principal */
+        .title {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: white; /* Blanco */
+        }
+
+        /* Estilos para el enlace */
+        .link {
+            font-size: 18px;
+            color: white; /* Blanco */
+            text-decoration: none;
+        }
+
+            .link:hover {
+                text-decoration: underline;
+            }
+
+        /* Estilos para el fondo */
+        body {
+            /*background-color: darkmagenta; /* Blanco ahumado */
+            background-image: url('img\\fondo_reporte.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            margin: 0; /* Agregamos esto para eliminar el margen predeterminado */
+            padding: 0; /* Agregamos esto para eliminar el padding predeterminado */
+        }
+    </style>
+</head>
+<body>
+    <div class="center">
+        <h1 class="title">Bienvenido a @ViewData["SicPE"]</h1>
+        <p><a href="https://sicobra.com.pe" class="link">Sicobra Perú</a>.</p>
+    </div>
+</body>
+</html>
+
+

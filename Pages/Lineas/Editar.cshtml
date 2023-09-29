@@ -1,0 +1,67 @@
+﻿@page
+@model SICPERU.Pages.Lineas.EditarModel
+<br>
+<h2>Editar Chip</h2>
+
+@if (!string.IsNullOrEmpty(Model.errorMessage))
+{
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>@Model.errorMessage</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<form method="POST" id="editarForm">
+    <input type="hidden" name="id_chip" value="@Model.chipsInfo.ID_CHIP">
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">NUMERO_CHIP</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="NUMERO_CHIP" value="@Model.chipsInfo.NUMERO_CHIP">
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">GATEWAY</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="GATEWAY" value="@Model.chipsInfo.GATEWAY">
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">SLOT</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="SLOT" value="@Model.chipsInfo.SLOT">
+        </div>
+    </div>
+
+
+
+    @if (!string.IsNullOrEmpty(Model.successMessage))
+    {
+        <div class="row mb-3">
+            <div class="col-sm-9">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>@Model.successMessage</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="row mb-3">
+        <div class="offset-sm-3 col-sm-3 d-grid">
+            <button type="button" class="btn btn-primary" onclick="confirmarEdicion()">Guardar</button>
+        </div>
+        <div class="col-sm-3 d-grid">
+            <a class="btn btn-outline-primary" href="/Lineas/Chips" role="button">Cancelar</a>
+        </div>
+    </div>
+</form>
+
+<script>
+    function confirmarEdicion() {
+        if (confirm('¿Estás seguro de editar el chip?')) {
+            document.getElementById("editarForm").submit();
+        }
+    }
+</script>

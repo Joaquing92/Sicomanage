@@ -1,0 +1,226 @@
+﻿@page
+@model SICPERU.Pages.Inventarios.Integral_MobileModel
+@{
+}
+<!DOCTYPE html>
+<html>
+<head>
+   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .dashboard {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .box {
+            background-color: #007BFF;
+            color: white;
+            border: 1px solid #007BFF;
+            border-radius: 5px;
+            padding: 8px;
+            text-align: center;
+            width: calc(20% - 10px);
+            margin: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+            .box h3 {
+                margin: 0;
+                font-size: 18px;
+            }
+
+            .box p {
+                margin: 5px 0;
+                font-size: 24px;
+                font-weight: bold;
+            }
+
+            .box.activo {
+                background-color: green;
+                border: 1px solid green;
+            }
+
+            .box.inactivo {
+                background-color: red;
+                border: 1px solid red;
+            }
+
+            .box.total {
+                background-color: black;
+                border: 1px solid black;
+            }
+
+
+
+
+        /* Estilos para centrar la tabla horizontalmente */
+        .table-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Estilos para la cabecera de la tabla */
+        table.table-bordered thead th {
+            background-color: #007BFF; /* Color azul */
+            color: white;
+            border-color: #dee2e6;
+            font-size: 12px; /* Tamaño de fuente ajustado */
+        }
+
+        /* Estilos para el contenido de la tabla */
+        table.table-bordered tbody td {
+            background-color: #F3F3F3; /* Color plomo */
+            border-color: #dee2e6;
+            font-size: 12px; /* Tamaño de fuente ajustado */
+        }
+
+        /* Estilos para el título */
+        h2 {
+            text-align: center;
+            color: #3498db; /* Color azul claro */
+            margin-bottom: 20px; /* Espacio inferior */
+            font-size: 30px; /* Tamaño de fuente ajustado */
+        }
+
+        /* Establecer el fondo de la página */
+        body {
+            background-image: url('img\\fondo_dash.jpg');
+            background-size: cover; /* Ajustar el tamaño de la imagen al área */
+            margin: 0;
+            padding: 0;
+            font-size: 14px; /* Tamaño de fuente ajustado */
+        }
+
+
+    </style>
+</head>
+<body>
+    <br>
+    <br>
+        <h2>Usuarios Integral Mobile</h2>
+    <br>
+    <br>
+
+    <div class="dashboard">
+        <div class="box activo">
+            <p id="totalUsuarios">0</p>
+            <h3>ACTIVOS</h3>
+        </div>
+        <div class="box" >
+            <p id="usuariosConFirmaNo">0</p>
+            <h3>SIN FIRMA</h3>
+        </div>
+    </div>
+
+    <br>
+    <br>
+
+    <div class="search-export-container">
+        <input type="text" id="buscador" placeholder="Buscar...">
+        <button id="exportButton" class="btn btn-primary">Exportar</button>
+    </div>
+    <br>
+    <br>
+
+    <div class="table-container">
+        <table id="myTable2" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Usuario</th>
+                    <th>Nombre</th>
+                <th>IMEI</th>
+                <th>Firma</th>
+                    <th>FechaCreacion</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var item in Model.listusuariosintegral)
+                {
+                    <tr>
+                        <td>@item.nickname</td>
+                        <td>@item.Nombre</td>
+                    <td>@item.IMEI</td>
+                        <td>@item.Firma</td>
+                        <td>@item.fechacreacion</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Contar total de usuarios
+        var totalUsuarios = document.querySelectorAll("#myTable2 tbody tr").length;
+        document.getElementById("totalUsuarios").textContent = totalUsuarios;
+
+        // Contar usuarios con Firma "NO"
+        var usuariosConFirmaNo = 0;
+        $("#myTable2 tbody tr").each(function () {
+            var firma = $(this).find("td:nth-child(4)").text();
+            if (firma.trim().toUpperCase() === "NO") {
+                usuariosConFirmaNo++;
+            }
+        });
+        document.getElementById("usuariosConFirmaNo").textContent = usuariosConFirmaNo;
+    });
+</script>
+
+        <script>
+    //exportar en excel
+    document.getElementById("exportButton").addEventListener("click", function () {
+        const visibleRows = document.querySelectorAll("#myTable2 tbody tr:not([style*='none'])");
+        const data = [["Usuario", "Nombre", "IMEI", "Firma", "FechaCreacion"]];
+
+        visibleRows.forEach(row => {
+            const cells = row.querySelectorAll("td");
+            const rowData = [];
+            cells.forEach(cell => {
+                rowData.push(cell.textContent);
+            });
+            data.push(rowData);
+        });
+
+        const worksheet = XLSX.utils.aoa_to_sheet(data);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, "Usuarios");
+
+        XLSX.writeFile(workbook, "usuarios.xlsx");
+    });
+        </script>
+
+            <script>
+    // Obtener una referencia al campo de entrada del buscador
+    const buscador = document.getElementById('buscador');
+
+    // Obtener una referencia a las filas de la tabla
+    const filas = document.querySelectorAll('#myTable2 tbody tr');
+
+    // Agregar un evento de entrada al campo de búsqueda
+    buscador.addEventListener('input', function () {
+        const filtro = buscador.value.toLowerCase();
+
+        filas.forEach(fila => {
+            const celdas = fila.getElementsByTagName('td');
+            let coincide = false;
+
+            for (let i = 0; i < celdas.length; i++) {
+                const celda = celdas[i];
+                if (celda.textContent.toLowerCase().includes(filtro)) {
+                    coincide = true;
+                    break;
+                }
+            }
+
+            fila.style.display = coincide ? '' : 'none';
+        });
+    });
+            </script>

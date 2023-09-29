@@ -1,0 +1,23 @@
+﻿@page
+@model SICPERU.Pages.Lineas.EliminarModel
+@{
+}
+
+<style>
+    .success-message {
+        color: green;
+        font-weight: bold;
+        margin-top: 10px;
+    }
+</style>
+
+@if (!string.IsNullOrEmpty(Model.SuccessMessage))
+{
+    <div class="success-message">@Model.SuccessMessage</div>
+}
+
+<form method="post">
+    <input type="hidden" name="id_chip" value="@Request.Query["id_chip"]" />
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a class="btn btn-secondary" href="/Lineas">Cancelar</a>
+</form>

@@ -1,0 +1,242 @@
+﻿@page
+@model SICPERU.Pages.Usuarios.C2VModel
+@{
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .dashboard {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .box {
+            background-color: #007BFF;
+            color: white;
+            border: 1px solid #007BFF;
+            border-radius: 5px;
+            padding: 8px;
+            text-align: center;
+            width: calc(20% - 10px);
+            margin: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+            .box h3 {
+                margin: 0;
+                font-size: 18px;
+            }
+
+            .box p {
+                margin: 5px 0;
+                font-size: 24px;
+                font-weight: bold;
+            }
+
+            .box.activo {
+                background-color: green;
+                border: 1px solid green;
+            }
+
+            .box.inactivo {
+                background-color: red;
+                border: 1px solid red;
+            }
+
+            .box.total {
+                background-color: black;
+                border: 1px solid black;
+            }
+
+
+
+        /* Estilos para centrar la tabla horizontalmente */
+        .table-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Estilos para la cabecera de la tabla */
+        table.table-bordered thead th {
+            background-color: #007BFF; /* Color azul */
+            color: white;
+            border-color: #dee2e6;
+            font-size: 12px; /* Tamaño de fuente ajustado */
+        }
+
+        /* Estilos para el contenido de la tabla */
+        table.table-bordered tbody td {
+            background-color: #F3F3F3; /* Color plomo */
+            border-color: #dee2e6;
+            font-size: 12px; /* Tamaño de fuente ajustado */
+        }
+
+        /* Estilos para el título */
+        h2 {
+            text-align: center;
+            color: #3498db; /* Color azul claro */
+            margin-bottom: 20px; /* Espacio inferior */
+            font-size: 30px; /* Tamaño de fuente ajustado */
+        }
+
+        /* Establecer el fondo de la página */
+        body {
+            background-image: url('img\\fondo_dash.jpg');
+            background-size: cover; /* Ajustar el tamaño de la imagen al área */
+            margin: 0;
+            padding: 0;
+            font-size: 14px; /* Tamaño de fuente ajustado */
+        }
+    </style>
+</head>
+
+<br>
+<br>
+<h2>CONTACT2VOICE</h2>
+<p></p>
+<br>
+<br>
+
+
+<div class="dashboard">
+    <div class="box">
+        <p  id="usuariosActivos">0</p>
+        <h3>ACTIVOS</h3>
+    </div>
+    <div class="box activo">
+        <p  id="usuariosActivosConExtension">0</p>
+        <h3>ACTIVOS CON EXTENSION</h3>
+    </div>
+    <div class="box">
+        <p  id="usuariosSinExtension">0</p>
+        <h3>SIN EXTENSION</h3>
+    </div>
+    <div class="box inactivo">
+        <p  id="usuariosInactivos">0</p>
+        <h3>INACTIVOS</h3>
+    </div>
+    <div class="box total">
+        <p >@Model.SumaUsuarios</p>
+        <h3>TOTAL</h3>
+    </div>
+</div>
+
+
+<br>
+<br>
+
+<div class="search-export-container">
+    <input type="text" id="buscador" placeholder="Buscar...">
+    <button id="exportButton" class="btn btn-primary">Exportar</button>
+</div>
+
+
+<br>
+<div class="table-container">
+    <table id="myTable2" class="table table-bordered table-striped">
+        <thead>
+
+            <tr>
+                <th>Usuario</th>
+                <th>Nombre</th>
+                <th>Perfil</th>
+                <th>Extension</th>
+                <th>Estado</th>
+                <th>Fecha Creación</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.listusuariosC2V)
+            {
+                <tr>
+                    <td>@item.username</td>
+                    <td>@item.NombreCompleto</td>
+                    <td>@item.Perfil</td>
+                    <td>@item.Extension</td>
+                    <td>@item.Estado</td>
+                    <td>@item.Fecharegistro</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+</html>
+
+<script>
+    // Obtener una referencia al campo de entrada del buscador
+    const buscador = document.getElementById('buscador');
+
+    // Obtener una referencia a las filas de la tabla
+    const filas = document.querySelectorAll('#myTable2 tbody tr');
+
+    // Agregar un evento de entrada al campo de búsqueda
+    buscador.addEventListener('input', function () {
+        const filtro = buscador.value.toLowerCase(); // Convertir a minúsculas para buscar sin distinción de mayúsculas/minúsculas
+
+        filas.forEach(fila => {
+            const celdas = fila.getElementsByTagName('td');
+            let coincide = false;
+
+            // Recorrer todas las celdas de la fila
+            for (let i = 0; i < celdas.length; i++) {
+                const celda = celdas[i];
+                if (celda.textContent.toLowerCase().includes(filtro)) {
+                    coincide = true;
+                    break;
+                }
+            }
+
+            // Mostrar u ocultar la fila en función de si coincide con el filtro
+            fila.style.display = coincide ? '' : 'none';
+        });
+    });
+
+    //cuadros totales
+    function actualizarTotales() {
+        const usuariosActivos = Array.from(filas).filter(fila => fila.style.display !== 'none' && fila.querySelector('td:nth-child(5)').textContent.toLowerCase() === 'activo').length;
+        const usuariosInactivos = Array.from(filas).filter(fila => fila.style.display !== 'none' && fila.querySelector('td:nth-child(5)').textContent.toLowerCase() === 'inactivo').length;
+        const usuariosSinExtension = Array.from(filas).filter(fila => fila.style.display !== 'none' && fila.querySelector('td:nth-child(5)').textContent.toLowerCase() === 'activo' && fila.querySelector('td:nth-child(4)').textContent === 'No asignada').length;
+        const usuariosActivosConExtension = Array.from(filas).filter(fila => fila.style.display !== 'none' && fila.querySelector('td:nth-child(5)').textContent.toLowerCase() === 'activo' && fila.querySelector('td:nth-child(4)').textContent !== 'No asignada').length;
+
+        document.getElementById('usuariosActivos').textContent = usuariosActivos;
+        document.getElementById('usuariosInactivos').textContent = usuariosInactivos;
+        document.getElementById('usuariosSinExtension').textContent = usuariosSinExtension;
+        document.getElementById('usuariosActivosConExtension').textContent = usuariosActivosConExtension;
+    }
+
+
+    // Llamar a la función inicial para calcular los totales al cargar la página
+    actualizarTotales();
+
+    //exportar en excel
+    document.getElementById("exportButton").addEventListener("click", function () {
+        const visibleRows = document.querySelectorAll("#myTable2 tbody tr:not([style*='none'])");
+        const data = [["Usuario", "Nombre", "Perfil", "Extension", "Fecha Creación"]];
+
+        visibleRows.forEach(row => {
+            const cells = row.querySelectorAll("td");
+            const rowData = [];
+            cells.forEach(cell => {
+                rowData.push(cell.textContent);
+            });
+            data.push(rowData);
+        });
+
+        const worksheet = XLSX.utils.aoa_to_sheet(data);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, "Usuarios");
+
+        XLSX.writeFile(workbook, "usuarios.xlsx");
+    });
+
+
+
+</script>

@@ -1,0 +1,89 @@
+﻿@page
+@model SICPERU.Pages.Gateways.IndexModel
+@{
+}
+
+<style>
+    /* Estilos para el título */
+    h2 {
+        text-align: center;
+    }
+
+    /* Estilos para las celdas de la tabla */
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        border: 1px solid #dddddd; /* Agregar un borde de 1px sólido de color gris a las celdas */
+        text-align: left;
+        padding: 8px;
+    }
+
+    th {
+        background-color: #f2f2f2; /* Cambiar el color de fondo para las celdas del encabezado */
+    }
+
+</style>
+
+<br>
+<br>
+<h2>Lista de Chips en Gateways</h2>
+<p></p>
+<a class='btn btn-primary btn-sm' href='/Gateways/Create'>Nuevo Chip</a>
+<p></p>
+<p></p>
+<table id="myTable" class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>NÚMERO</th>
+            <th>GATEWAY</th>
+            <th>UBICACION</th>
+            <th>COLOCADO</th>
+            <th>EXTRAIDO</th>
+            <th>NUM_NUEVO</th>
+            <th>ESTADO</th>
+            <th>ACCION</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach(var item in Model.listgateways)
+        {
+            <tr>
+                <td>@item.id_chip</td>
+                <td>@item.numero_chip</td>
+                <td>@item.nombre_gateway</td>
+                <td>@item.ubicacion_gateway</td>
+                <td>@item.fecha_colocacion</td>
+                <td>@item.fecha_extraccion</td>
+                <td>@item.numero_nuevo</td>
+                <td>@item.estado</td>
+                <td>
+                    <a class="btn btn-primary btn-sm" href="/Gateways/Editar?id_chip=@item.id_chip">Editar</a>
+                    <a class="btn btn-danger btn-sm" href="/Gateways/Delete?id_chip=@item.id_chip">Borrar</a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                     'csv'
+                ],
+
+                paging: true, // Activar paginación
+                lengthMenu: [20, 50, 100] // Opciones de cantidad de elementos por página
+                //paging: false // Desactivar paginación
+            });
+        });
+    </script>
+}

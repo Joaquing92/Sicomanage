@@ -1,0 +1,238 @@
+﻿@page
+@model SICPERU.Pages.Lineas.ChipsModel
+@{
+}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+<style>
+    .dashboard {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+    }
+
+    .box {
+        background-color: #007BFF;
+        color: white;
+        border: 1px solid #007BFF;
+        border-radius: 5px;
+        padding: 8px;
+        text-align: center;
+        width: calc(20% - 10px);
+        margin: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+        .box h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .box p {
+            margin: 5px 0;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .box.activo {
+            background-color: green;
+            border: 1px solid green;
+        }
+
+        .box.inactivo {
+            background-color: red;
+            border: 1px solid red;
+        }
+
+        .box.total {
+            background-color: black;
+            border: 1px solid black;
+        }
+
+
+
+
+    /* Estilos para centrar la tabla horizontalmente */
+    .table-container {
+        display: flex;
+        justify-content: center;
+    }
+
+    /* Estilos para la cabecera de la tabla */
+    table.table-bordered thead th {
+        background-color: #007BFF; /* Color azul */
+        color: white;
+        border-color: #dee2e6;
+        font-size: 12px; /* Tamaño de fuente ajustado */
+    }
+
+    /* Estilos para el contenido de la tabla */
+    table.table-bordered tbody td {
+        background-color: #F3F3F3; /* Color plomo */
+        border-color: #dee2e6;
+        font-size: 12px; /* Tamaño de fuente ajustado */
+    }
+
+    /* Estilos para el título */
+    h2 {
+        text-align: center;
+        color: #3498db; /* Color azul claro */
+        margin-bottom: 20px; /* Espacio inferior */
+        font-size: 30px; /* Tamaño de fuente ajustado */
+    }
+
+    /* Establecer el fondo de la página */
+    body {
+        background-image: url('img\\fondo_dash.jpg');
+        background-size: cover; /* Ajustar el tamaño de la imagen al área */
+        margin: 0;
+        padding: 0;
+        font-size: 14px; /* Tamaño de fuente ajustado */
+    }
+</style>
+
+<br>
+<br>
+<h2>CHIPS</h2>
+<br>
+<br>
+<div class="search-export-container">
+    <input type="text" id="buscador" placeholder="Buscar...">
+    <button id="exportButton" class="btn btn-primary">Exportar</button>
+    @* <a class='btn btn-primary' href='/Lineas/Crear'>Nuevo Chip</a>*@
+</div>
+<br>
+
+
+<div class="table-container">
+    <table id="myTable2" class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>NUMERO_CHIP</th>
+                <th>GATEWAY</th>
+                <th>SLOT</th>
+                <th><a class='btn btn-warning   btn-sm' href='/Lineas/Crear'><i class="fas fa-user-plus"></i></a></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model.listachips)
+            {
+                <tr>
+                    <td>@item.NUMERO_CHIP</td>
+                    <td>@item.GATEWAY</td>
+                    <td>@item.SLOT</td>
+                    <td>
+                        <a class="btn btn-primary btn-sm" href="/Lineas/Editar?id_chip=@item.ID_CHIP">  <i class="fas fa-edit"></i></a>
+                        <a class="btn btn-danger btn-sm delete-chip" data-id="@item.ID_CHIP"> <i class="fas fa-trash"></i></a>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+
+    <!-- Modal de confirmación -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Confirmar Eliminación</h5>
+                </div>
+                <div class="modal-body">
+                    ¿Estás seguro de que deseas eliminar este chip?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="cancelDelete">Cancelar</button>
+                    <button type="button" class="btn btn-danger" id="confirmDelete">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('.delete-chip').click(function () {
+                var chipId = $(this).data('id');
+                $('#confirmDelete').data('chip-id', chipId);
+                $('#deleteModal').modal('show');
+            });
+
+            $('#cancelDelete').click(function () {
+                $('#deleteModal').modal('hide');
+            });
+
+            $('#confirmDelete').click(function () {
+                var chipId = $(this).data('chip-id');
+                window.location.href = '/Lineas/Eliminar?id_chip=' + chipId;
+            });
+        });
+
+
+
+    </script>
+}
+
+<script>
+
+    // Obtener una referencia al campo de entrada del buscador
+    const buscador = document.getElementById('buscador');
+
+    // Obtener una referencia a las filas de la tabla
+    const filas = document.querySelectorAll('#myTable2 tbody tr');
+
+    // Agregar un evento de entrada al campo de búsqueda
+    buscador.addEventListener('input', function () {
+        const filtro = buscador.value.toLowerCase();
+
+        filas.forEach(fila => {
+            const celdas = fila.getElementsByTagName('td');
+            let coincide = false;
+
+            for (let i = 0; i < celdas.length; i++) {
+                const celda = celdas[i];
+                if (celda.textContent.toLowerCase().includes(filtro)) {
+                    coincide = true;
+                    break;
+                }
+            }
+
+            fila.style.display = coincide ? '' : 'none';
+        });
+    });
+</script>
+
+        <script>
+    function exportToExcel() {
+        const table = document.getElementById('myTable2');
+        const visibleRows = table.querySelectorAll('tbody tr:not([style*="display: none"])');
+        const data = [];
+
+        visibleRows.forEach(row => {
+            const rowData = [];
+            const cells = row.querySelectorAll('td:not(:nth-child(4))');
+            cells.forEach(cell => {
+                rowData.push(cell.innerText);
+            });
+            data.push(rowData);
+        });
+
+        const ws = XLSX.utils.aoa_to_sheet([['NUMERO_CHIP', 'GATEWAY', 'SLOT'], ...data]);
+
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+        XLSX.writeFile(wb, 'chips_activos.xlsx');
+    }
+
+    // Esperar a que el DOM esté listo
+    document.addEventListener('DOMContentLoaded', function () {
+        const exportButton = document.getElementById('exportButton');
+        exportButton.addEventListener('click', exportToExcel);
+    });
+
+        </script>

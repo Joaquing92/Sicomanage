@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\xampp\htdocs\SICPER</_PublishTargetUrl>
+    <History>True|2023-07-12T23:06:53.5687881Z;True|2023-07-12T14:30:35.5215049-05:00;True|2023-07-06T17:37:11.5742801-05:00;True|2023-07-06T17:32:35.9461319-05:00;True|2023-07-06T17:23:35.4224618-05:00;True|2023-07-06T17:21:00.5621529-05:00;True|2023-07-05T18:34:39.4633192-05:00;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+</Project>
